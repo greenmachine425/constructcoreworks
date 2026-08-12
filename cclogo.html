@@ -15,14 +15,31 @@
       /* IE and Edge */
       scrollbar-width: none;
       /* Firefox */
+      background-color: #000;
+      /* Added dark background to make colors pop */
+      margin: 0;
     }
 
-    <iframe src="constructcoreworks.com"scrolling="no"></iframe>iframe {
+    iframe {
       pointer-events: none;
     }
 
+    /* CREATIVE ENTRANCE ANIMATION */
+    @keyframes cinematicEnter {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+        filter: blur(20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+    }
+
     /* Center the images horizontally and vertically */
-    
     .images {
       display: flex;
       justify-content: center;
@@ -31,6 +48,8 @@
       overflow: hidden;
       max-height: 100%;
       user-select: none;
+      /* Apply the entrance animation here */
+      animation: cinematicEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
     /* Scale the images with the size of the viewport */
@@ -79,7 +98,6 @@
 
     .rotate {
       animation: rotate 4s linear infinite;
-      /* Adjust the duration (4s) and timing function as needed */
     }
 
     @keyframes rotate {
@@ -94,38 +112,38 @@
 
     .rotate-core-fast {
       animation-duration: 2s;
-      /* Adjust the duration for faster rotation */
     }
-/* Keyframes for color change */
-@keyframes colorChange {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-  50% {
-    filter: hue-rotate(180deg);
-    /* Rotate 180 degrees to transition from green to purple */
-  }
-  100% {
-    filter: hue-rotate(0deg);
-    /* Rotate back to green */
-  }
-}
 
-/* Apply color change animation to core images */
-.rotate-core1 {
-  animation: rotate1 10s linear infinite, colorChange 10s linear infinite;
-  animation-delay: -1s;
-}
+    /* Keyframes for color change */
+    @keyframes colorChange {
+      0% {
+        filter: hue-rotate(0deg);
+      }
 
-.rotate-core2 {
-  animation: rotate2 20s linear infinite, colorChange 10s linear infinite;
-animation-delay: -0.5s;
-}
+      50% {
+        filter: hue-rotate(180deg);
+      }
 
-.rotate-core3 {
-  animation: rotate3 8s linear infinite, colorChange 10s linear infinite;
-  animation-delay: 0s;
-}
+      100% {
+        filter: hue-rotate(0deg);
+      }
+    }
+
+    /* Apply color change animation to core images */
+    .rotate-core1 {
+      animation: rotate1 10s linear infinite, colorChange 10s linear infinite;
+      animation-delay: -1s;
+    }
+
+    .rotate-core2 {
+      animation: rotate2 20s linear infinite, colorChange 10s linear infinite;
+      animation-delay: -0.5s;
+    }
+
+    .rotate-core3 {
+      animation: rotate3 8s linear infinite, colorChange 10s linear infinite;
+      animation-delay: 0s;
+    }
 
     /* Keyframes for the rotation animations */
     @keyframes rotate1 {
@@ -145,7 +163,6 @@ animation-delay: -0.5s;
 
       100% {
         transform: rotate(-360deg);
-        /* Negative rotation for opposite direction */
       }
     }
 
@@ -156,29 +173,25 @@ animation-delay: -0.5s;
 
       100% {
         transform: rotate(720deg);
-        /* Faster rotation */
       }
     }
   </style>
 </head>
 
 <body>
-<div class="images">
+  <div class="images">
     <img src="https://raw.githubusercontent.com/XPISigma/constructcoreworks/main/Title.png" alt="Title" id="titleImage" />
     <img src="https://raw.githubusercontent.com/XPISigma/constructcoreworks/main/core3.png" alt="Core 3" class="rotate-core3" />
     <img src="https://raw.githubusercontent.com/XPISigma/constructcoreworks/main/core2.png" alt="Core 2" class="rotate-core2" />
     <img src="https://raw.githubusercontent.com/XPISigma/constructcoreworks/main/core1.png" alt="Core 1" class="rotate-core1" />
-</div>
+  </div>
   <script>
     const titleImage = document.getElementById('titleImage');
     const imagesContainer = document.querySelector('.images');
-    // Variable to track the state of the animation
     let isAnimationFast = false;
-    // Toggle animation speed on title click
+    
     titleImage.addEventListener('click', () => {
-      // Toggle the animation speed state
       isAnimationFast = !isAnimationFast;
-      // Toggle the CSS class for faster core rotation
       imagesContainer.classList.toggle('rotate-core-fast', isAnimationFast);
     });
   </script>
