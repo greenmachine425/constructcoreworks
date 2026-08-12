@@ -4,17 +4,13 @@
 <head>
   <title>Title with 4 Images</title>
   <style>
-    /* Hide scrollbar for Chrome, Safari and Opera */
     body::-webkit-scrollbar {
       display: none;
     }
 
-    /* Hide scrollbar for IE, Edge and Firefox */
     body {
       -ms-overflow-style: none;
-      /* IE and Edge */
       scrollbar-width: none;
-      /* Firefox */
       margin: 0;
       background-color: transparent;
     }
@@ -23,21 +19,32 @@
       pointer-events: none;
     }
 
-    /* CREATIVE ENTRANCE ANIMATION */
-    @keyframes cinematicEnter {
+    @keyframes titleEnter {
       0% {
         opacity: 0;
-        transform: scale(0.3);
+        scale: 0.3;
         filter: blur(20px);
       }
       100% {
         opacity: 1;
-        transform: scale(1);
+        scale: 1;
         filter: blur(0);
       }
     }
 
-    /* Center the images horizontally and vertically */
+    @keyframes coreEnter {
+      0% {
+        opacity: 0;
+        scale: 3;
+        filter: blur(20px);
+      }
+      100% {
+        opacity: 1;
+        scale: 1;
+        filter: blur(0);
+      }
+    }
+
     .images {
       display: flex;
       justify-content: center;
@@ -46,28 +53,24 @@
       overflow: hidden;
       max-height: 100%;
       user-select: none;
-      /* Apply the entrance animation here */
-      animation: cinematicEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
-    /* Scale the images with the size of the viewport */
     .images img {
       max-width: 100%;
       height: auto;
     }
 
-    /* Make the title image appear on top */
     .images img:first-child {
       order: -1;
+      animation: titleEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0s both;
     }
 
-    /* Make the core images appear behind the title */
     .images img:not(:first-child) {
       position: absolute;
       z-index: -1;
+      border-radius: 50%;
     }
 
-    /* Set the size of each image */
     .images img:first-child {
       width: 100%;
     }
@@ -111,7 +114,6 @@
       animation-duration: 2s;
     }
 
-    /* Keyframes for color change */
     @keyframes colorChange {
       0% {
         filter: hue-rotate(0deg);
@@ -124,23 +126,27 @@
       }
     }
 
-    /* Apply color change animation to core images */
     .rotate-core1 {
-      animation: rotate1 10s linear infinite, colorChange 10s linear infinite;
-      animation-delay: -1s;
+      animation: 
+        rotate1 10s linear infinite -1s, 
+        colorChange 10s linear infinite -1s,
+        coreEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s both;
     }
 
     .rotate-core2 {
-      animation: rotate2 20s linear infinite, colorChange 10s linear infinite;
-      animation-delay: -0.5s;
+      animation: 
+        rotate2 20s linear infinite -0.5s, 
+        colorChange 10s linear infinite -0.5s,
+        coreEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
     }
 
     .rotate-core3 {
-      animation: rotate3 8s linear infinite, colorChange 10s linear infinite;
-      animation-delay: 0s;
+      animation: 
+        rotate3 8s linear infinite 0s, 
+        colorChange 10s linear infinite 0s,
+        coreEnter 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0s both;
     }
 
-    /* Keyframes for the rotation animations */
     @keyframes rotate1 {
       0% {
         transform: rotate(0deg);
